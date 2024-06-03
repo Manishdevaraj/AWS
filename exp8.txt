@@ -1,0 +1,67 @@
+ wget https://repo1.maven.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar
+
+wget https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+
+javac -cp .:junit-4.13.2.jar:hamcrest-core-1.3.jar src/Calculator.java test/CalculatorTest.java
+
+java -cp .:src:test:junit-4.13.2.jar:hamcrest-core-1.3.jar org.junit.runner.JUnitCore CalculatorTest
+
+bank.java:
+public class bank {
+   
+    int amt=0;
+   public int deposit(int c)
+   {
+       amt=amt+c;
+       return amt;
+   }
+   public int bal()
+   {
+       return amt;
+   }
+  public int withdrawal(int c)
+  {
+      amt=amt-c;
+      return amt;
+  }
+}
+
+bankTest.java:
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+public class bankTest {
+    @Test
+    public void deposit() {
+        bank user = new bank();
+        
+       int bal= user.deposit(12);
+       System.out.println("After Deposit Your Balance is : "+bal);
+       
+       int wbal =user.withdrawal(10);
+       System.out.println("Your withdrawl succed!!!!");
+       System.out.println(" Your Current Balance  is : "+wbal);
+       assertEquals("Balance after withdrawal should be 2", 2, wbal);
+        
+    }
+  @Test
+  public void withdrawl()
+  {
+       bank user = new bank();
+       
+       int bal=user.bal();
+       
+       
+       int withdrawalAmount = 1;
+        
+        if (withdrawalAmount > bal) {
+            fail("Withdrawal amount exceeds balance");
+        }
+       
+      int wbal =user. withdrawal(withdrawalAmount);
+      System.out.println("Your withdrawl succed!!!!");
+      System.out.println(" Your Current Balance  is : "+wbal);
+        assertEquals("Balance after withdrawal should be 0", 0, wbal);
+  }
+    
+}

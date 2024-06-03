@@ -1,0 +1,11 @@
+sudo su
+
+yum install docker -y
+
+systemctl start docker
+
+docker volume create my_volume
+
+docker run -d --name my_nginx -v my_volume:/usr/share/nginx/html -p 80:80 nginx
+
+docker inspect my_nginx
